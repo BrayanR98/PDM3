@@ -20,7 +20,7 @@ export default function ventas ({navigation,route}) {
           data={data}
           //keyExtractor={({ id }, index) => id}
           renderItem={({ item }) => (     
-                <View style = {{border:'solid'}}>
+                <View style = {{borderBottom:'1px solid gray'}}>
                     <View style={{flexDirection:"row"}}>
                         <Textrows
                         label = "fecha:"

@@ -8,7 +8,7 @@ import { Helpers } from '../helpers/Helpers';
 export default function Register({navigation}){
   let objt = new Helpers()
 
-    const {register,control,handleSubmit,formState:{errors}}=useForm({
+    const {control,handleSubmit,formState:{errors}}=useForm({
         defaultValues:{
             idvend:'',
             nombre:'',
@@ -45,7 +45,7 @@ export default function Register({navigation}){
         render={({field:{onChange,onBlur,value}})=>(
           <TextInput
           style={[styles.inputs,{borderColor:errors.idvend?.type == "required"||errors.idvend?.type == "maxLength"
-          ||errors.idvend?.type == "minLength"||errors.idvend?.type == "pattern"?'red':'green'}]}
+          ||errors.idvend?.type == "minLength"||errors.idvend?.type == "pattern"?'#e33d35':'#58e126'}]}
           placeholder="identificacion"
           onChange={onChange}
           onBlur={onBlur}
@@ -71,7 +71,7 @@ export default function Register({navigation}){
         render={({field:{onChange,onBlur,value}})=>(
           <TextInput
           style={[styles.inputs,{borderColor:errors.nombre?.type == "required"||errors.nombre?.type == "maxLength"
-          ||errors.nombre?.type == "minLength"||errors.nombre?.type == "pattern"?'red':'green'}]}
+          ||errors.nombre?.type == "minLength"||errors.nombre?.type == "pattern"?'#e33d35':'#58e126'}]}
           placeholder="nombre "
           onChange={onChange}
           onBlur={onBlur}
@@ -84,19 +84,20 @@ export default function Register({navigation}){
       {errors.nombre?.type=='maxLength'&&<Text style={{color:'red'}}> El Nombre debe tener almenos 30 chars</Text>}
       {errors.nombre?.type=='minLength'&&<Text style={{color:'red'}}> El Nombre debe tener minimo 8 chars</Text>}
       {errors.nombre?.type=='pattern'&&<Text style={{color:'red'}}> El Nombre debe tener solo letras y espacios</Text>}
+      
 
 <Controller
         control={control}
         rules={{
           required:true,
-          pattern: /^([da-z_.-]+)@([da-z.-]+).([a-z.]{2,6})$/,
+          pattern: /^([da-zA-Z_.-]+)@([da-zA-Z.-]+).([a-z.]{2,6})$/,
           maxLength:50,
           minLength:15
         }}
         render={({field:{onChange,onBlur,value}})=>(
           <TextInput
           style={[styles.inputs,{borderColor:errors.correo?.type == "required"||errors.correo?.type == "maxLength"
-          ||errors.correo?.type == "minLength"||errors.correo?.type == "pattern"?'red':'green'}]}
+          ||errors.correo?.type == "minLength"||errors.correo?.type == "pattern"?'#e33d35':'#58e126'}]}
           placeholder="correo"
           onChange={onChange}
           onBlur={onBlur}
@@ -115,7 +116,7 @@ export default function Register({navigation}){
   
             <Text> es Admin? </Text>
             <Switch
-              trackColor={{ false: "#767577", true: "green" }}
+              trackColor={{ false: "#767577", true: "#58e126" }}
               //thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}       
               onValueChange={toggleSwitch}
               value={isfourth}
@@ -129,7 +130,7 @@ export default function Register({navigation}){
     style={styles.butons}
     onPress={handleSubmit(onSubmit)}
     >
-        <Text style={{color:'white'}}>Registrarse</Text>
+        <Text style={{color:'white', fontFamily:'Kanit', paddingLeft: '15px',paddingRight: '15px',letterSpacing:'1px',fontSize:'20px',borderRadius:'.4em'}}>Registrarse</Text>
     </TouchableOpacity>
       
         </View>

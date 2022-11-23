@@ -1,9 +1,10 @@
-import { Text,View,TextInput,TouchableOpacity,Picker } from 'react-native';
+import { Text,View,TextInput,TouchableOpacity,Picker, Alert } from 'react-native';
 import { styles } from '../assets/style/style.js';
 import {useForm,Controller} from 'react-hook-form';
 import { useState } from 'react';
 import {userv} from './Homev.jsx'
 import {Helpers} from '../helpers/Helpers.js'
+
 
 export default function RegistroVenta(){
     const [valorZona, setValorZona] = useState('')
@@ -46,17 +47,19 @@ export default function RegistroVenta(){
             nombre:userv.nombre,
             correo:userv.correo,
             rol:userv.rol,
-            totalcomision:userv.totalcomision += venta.comision
+            totalcomision:userv.totalcomision!=null?userv.totalcomision+= venta.comision:venta.comision
         }
 
         let ayuda = new Helpers()
         ayuda.saveVenta(venta)
         ayuda.updateUser(userv.idvend,vendedor)
-        console.log("exito en el registro!");
+        alert("exito en el registro!");
+        
        }else{
-        console.log("error");
+        alert("error");
        }
     }
+
 
     return(
         <View style={styles.container}>
@@ -74,7 +77,7 @@ export default function RegistroVenta(){
                 control={control}
                 rules={{
                     required:true,
-                    pattern:/([2-9]000000+)/g,
+                    pattern:/([2-9][0-9]00000)/,
                     maxLength:12,
                     minLength:7
                 }}

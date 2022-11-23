@@ -2,8 +2,6 @@ import {Text,View,TextInput,TouchableOpacity} from 'react-native'
 import { styles } from '../assets/style/style'
 import {useForm,Controller} from 'react-hook-form'
 import { Helpers} from '../helpers/Helpers'
-import { useEffect } from 'react'
-
 
 
 export default function Login({navigation}){
@@ -11,6 +9,9 @@ export default function Login({navigation}){
         nombre:'',
         idvend:''
     })
+    let lista = new Helpers()
+       lista.getUsers()
+       .then(d => console.log(d))
 
      const onSubmit= async (data) =>{   
         let lista = new Helpers();         
@@ -26,12 +27,16 @@ export default function Login({navigation}){
          }
       }
        if(val){navigation.navigate(user.rol?'Homea':'Homev',user)}
-       else{console.log('usuario no se encuentra')}
+       else{console.log('usuario no encontrado')}
      }
    return(
        <View style={styles.container}>
             <View style={{alignItems:'center',justifyContent:'center'}}>
-               <Text style={{fontSize:30,fontFamily:'aerial',fontWeight:'bold',color:'green'}}> Iniciar Sesion</Text>
+            <style>
+            @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@600&display=swap');
+            </style>
+               <Text style={{fontSize:30,fontFamily:'Kanit',fontWeight:'bold',color:'#1c8712',marginBottom:'5%'}}> Iniciar Sesión</Text>
+               
             </View>
             <Controller
            control={control}
@@ -43,7 +48,7 @@ export default function Login({navigation}){
            }}
            render={({field:{onChange,onBlur,value}})=>(
                <TextInput
-               style={[styles.inputs,{borderColor:errors.nombre ?.type == 'required' || errors.nombre ?.type == 'pattern' || errors.nombre ?.type == 'maxLength' || errors.nombre ?.type == 'minLength' ? 'red' : 'green' }]}
+               style={[styles.inputs,{borderColor:errors.nombre ?.type == 'required' || errors.nombre ?.type == 'pattern' || errors.nombre ?.type == 'maxLength' || errors.nombre ?.type == 'minLength' ? '#e33d35' : '#58e126' }]}
                placeholder='Nombre'
                onChange={onChange}
                onBlur={onBlur}
@@ -54,7 +59,7 @@ export default function Login({navigation}){
            />
            
            {errors.nombre ?.type == 'required' && <Text style={{color:'red'}}> El campo es requerido </Text>}
-           {errors.nombre ?.type == 'pattern' && <Text style={{color:'red'}}> debecontener solo letras y espacios</Text>}
+           {errors.nombre ?.type == 'pattern' && <Text style={{color:'red'}}> Debe contener solo letras y espacios</Text>}
            {errors.nombre ?.type == 'maxLength' && <Text style={{color:'red'}}> Debe contener maximo 30 caracteres</Text>}
            {errors.nombre ?.type == 'minLength' && <Text style={{color:'red'}}>Debe contener minimo 8 caracteres</Text>} 
 
@@ -70,7 +75,7 @@ export default function Login({navigation}){
        }}
        render={({field:{onChange,onBlur,value}})=>(
            <TextInput
-           style={[styles.inputs,{borderColor:errors.idvend?.type=='required'||errors.idvend?.type=='pattern'||errors.idvend?.type=='maxLength'||errors.idvend?.type=='minlenght'?'red':'green'}]}
+           style={[styles.inputs,{borderColor:errors.idvend?.type=='required'||errors.idvend?.type=='pattern'||errors.idvend?.type=='maxLength'||errors.idvend?.type=='minlenght'?'#e33d35':'#58e126'}]}
            placeholder="identificacion"
            onChange={onChange}
            onBlur={onBlur}
@@ -85,14 +90,14 @@ export default function Login({navigation}){
 
         <TouchableOpacity style={styles.butons}
        onPress={handleSubmit(onSubmit)}>
-           <Text style={{color:'white'}}> Ingresar</Text>
+           <Text style={{color:'white', fontFamily:'Kanit', paddingLeft: '15px',paddingRight: '15px',letterSpacing:'1px',fontSize:'20px',borderRadius:'.4em'}}> Ingresar</Text>
        </TouchableOpacity>
        
         <TouchableOpacity style={{}}
        onPress={()=>{
            navigation.navigate('Register')
        }}>
-           <Text style={{marginTop:15,color:'green',textDecorationLine:'underline'}}>Registrarse</Text>
+           <Text style={{marginTop:15,color:'green',textDecorationLine:'none',}}>Registrarse</Text>
        </TouchableOpacity>  
 
        </View>

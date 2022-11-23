@@ -18,7 +18,7 @@ export default function Allventas ({navigation,route}) {
           //keyExtractor={({ id }, index) => id}
           renderItem={({ item }) => (     
                 <View>
-                    <View style={{flexDirection:"row"}}>
+                    <View style={{flexDirection:"row",borderBottom:'1px solid gray'}}>
                         <Textrows
                         label = "fecha:"
                         dato = {item.fecha}

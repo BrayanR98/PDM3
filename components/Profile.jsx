@@ -1,13 +1,24 @@
 import Textrows from "./Textrows";
 import {usera} from "./Homea";
 import {userv} from "./Homev";
+import { useState } from 'react';
+import {Helpers} from '../helpers/Helpers'
 let user = {}
 export default function Profile () {
+const [user,setUser]=useState('')
+    
+
 if(usera.rol){
-    user = usera
-}else{
-    user = userv
+    setUser(usera)
+}else{    
+        let u = new Helpers()
+     u.getUserId(userv.idvend)
+     .then( d => setUser(userv))
+    
 }
+
+
+
 const rol = (d) => {
     let r = ""
     if(d == true) {
